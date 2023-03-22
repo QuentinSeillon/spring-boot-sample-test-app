@@ -11,7 +11,7 @@ pipeline {
       parallel {
         stage('test intégration') {
           steps {
-            echo 'test d\'intégration'
+            echo 'test d\'int�gration'
           }
         }
 
