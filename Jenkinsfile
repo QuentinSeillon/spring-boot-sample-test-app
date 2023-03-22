@@ -3,15 +3,17 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        echo 'build stage'
+        echo 'Debut build'
+        sh './mvnw -DskipTests clean install'
+        echo 'Fin de Build'
       }
     }
 
     stage('test') {
       parallel {
-        stage('test intégration') {
+        stage('test intÃ©gration') {
           steps {
-            echo 'test d\'int�gration'
+            echo 'test d\'intégration'
           }
         }
 
