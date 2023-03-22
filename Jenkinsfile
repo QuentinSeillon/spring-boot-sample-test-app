@@ -13,19 +13,25 @@ pipeline {
       parallel {
         stage('test intÃƒÂ©gration') {
           steps {
-            echo 'test d\'intÃ©gration'
+            echo 'Debut test d\'intégration'
+            sh './mvnw -Dtest=com.example.testingweb.integration.** test    '
+            echo 'Fin test intégration'
           }
         }
 
         stage('test fonctionnel') {
           steps {
-            echo 'test fonctionnel'
+            echo 'Debut test fonctionnel'
+            sh './mvnw -Dtest=com.example.testingweb.functional.** test    '
+            echo 'Fin test fonctionnel'
           }
         }
 
         stage('smoke test') {
           steps {
-            echo 'smoke test'
+            echo 'Debut smoke test'
+            sh './mvnw -Dtest=com.example.testingweb.smoke.** test    '
+            echo 'Fin test smoke'
           }
         }
 
