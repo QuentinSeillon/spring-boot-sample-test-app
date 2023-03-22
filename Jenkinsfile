@@ -11,11 +11,11 @@ pipeline {
 
     stage('test') {
       parallel {
-        stage('test intÃ©gration') {
+        stage('test intÃƒÂ©gration') {
           steps {
-            echo 'Debut test d\'int�gration'
+            echo 'Debut test d\'intégration'
             sh './mvnw -Dtest=com.example.testingweb.integration.** test    '
-            echo 'Fin test int�gration'
+            echo 'Fin test intégration'
           }
         }
 
@@ -40,7 +40,9 @@ pipeline {
 
     stage('deploy') {
       steps {
-        echo 'stage deploy'
+        echo 'Debut stage deploy'
+        sh 'java -jar target/testing-web-complete.jar'
+        echo 'Fin stage deploy'
       }
     }
 
