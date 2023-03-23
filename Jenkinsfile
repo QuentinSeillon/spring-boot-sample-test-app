@@ -6,16 +6,18 @@ pipeline {
         echo 'Debut build'
         sh './mvnw -DskipTests clean install'
         echo 'Fin de Build'
+        archiveArtifacts '**/target/*.jar'
       }
     }
 
     stage('test') {
       parallel {
-        stage('test intÃƒÂ©gration') {
+        stage('test int�gration') {
           steps {
             echo 'Debut test d\'intégration'
             sh './mvnw -Dtest=com.example.testingweb.integration.** test    '
             echo 'Fin test intégration'
+            junit '**/target/surefire-reports/TEST-*.xml'
           }
         }
 
@@ -41,8 +43,9 @@ pipeline {
     stage('deploy') {
       steps {
         echo 'Debut stage deploy'
-        sh 'java -jar target/testing-web-complete.jar'
+        sh 'java -jar target/testing-web-complete.jar &'
         echo 'Fin stage deploy'
+        input(message: 'Voulez-vous continuer?', ok: 'Allons-y')
       }
     }
 
