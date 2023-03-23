@@ -12,11 +12,11 @@ pipeline {
 
     stage('test') {
       parallel {
-        stage('test int�gration') {
+        stage('test intégration') {
           steps {
-            echo 'Debut test d\'intégration'
+            echo 'Debut test d\'intÃ©gration'
             sh './mvnw -Dtest=com.example.testingweb.integration.** test    '
-            echo 'Fin test intégration'
+            echo 'Fin test intÃ©gration'
             junit '**/target/surefire-reports/TEST-*.xml'
           }
         }
@@ -53,5 +53,11 @@ pipeline {
   tools {
     maven 'maven 3.9'
     jdk 'java 11'
+  }
+  post {
+    success {
+      emailext(to: 'quentin.seillon@gmail.com', subject: "${env.BUILD_ID} - ${currentBuild.result}", body: "${env.BUILD_ID} - ${env.JENKINS_URL}")
+    }
+
   }
 }
